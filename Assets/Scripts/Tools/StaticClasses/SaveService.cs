@@ -25,6 +25,7 @@ public static class SaveService
 {
 
     private static string SaveFilePath => Path.Combine(Application.persistentDataPath, "save.json");
+    // ^^ c:\Users\<username>\AppData\LocalLow\<company name>\<project name>\save.json
 
     // API //
 
