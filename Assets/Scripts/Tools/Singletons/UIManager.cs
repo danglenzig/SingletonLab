@@ -2,23 +2,27 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class UIManager : Singleton<UIManager>
+public class UIManager : MonoBehaviour
 {
     [SerializeField] private Canvas dialogueCanvas;
     [SerializeField] private Canvas loadingScreen;
     [SerializeField] private Canvas startMenu;
     [SerializeField] private Canvas hud;
     [SerializeField] private bool verbose = false;
+    private Canvas focusedCanvas = null;
+    private Canvas previousFocusedCanvas = null;
+    private List<Canvas> canvasList = new List<Canvas>();
 
     public Canvas DialogueCanvas { get => dialogueCanvas; }
     public Canvas LoadingScreen { get => LoadingScreen; }
     public Canvas StartMenu { get => startMenu; }
     public Canvas Hud { get => hud; }
+    public Canvas FocusedCanvas { get => focusedCanvas; }
+    public Canvas PreviousFocusedCanvas { get => previousFocusedCanvas; }
 
-    private List<Canvas> canvasList = new List<Canvas>();
     
-    Canvas focusedCanvas = null;
-    Canvas previousFocusedCanvas = null;
+    
+    
 
     /////////
     // API //

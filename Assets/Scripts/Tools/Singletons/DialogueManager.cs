@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DialogueManager : Singleton<DialogueManager>
+public class DialogueManager : MonoBehaviour
 {
     public void DialogueManagerTest(string speakerName, string lineText)
     {

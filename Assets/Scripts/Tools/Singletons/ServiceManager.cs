@@ -1,0 +1,18 @@
+using UnityEngine;
+
+public class ServiceManager : Singleton<ServiceManager>
+{
+    [SerializeField] private GameManager game;
+    [SerializeField] private UIManager ui;
+    [SerializeField] private DialogueManager dialogue;
+    [SerializeField] private QuestManager quests;
+    [SerializeField] private InputHandler inputHandler;
+    //...and so on
+
+    public UIManager UI { get => ui; }
+    public DialogueManager Dialogue { get => dialogue; }
+    public GameManager Game { get => game; }
+    public QuestManager Quests { get => quests; }
+    public InputHandler InputH { get => inputHandler; }
+    //...and so on
+}
