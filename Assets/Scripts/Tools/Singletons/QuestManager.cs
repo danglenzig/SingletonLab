@@ -120,7 +120,11 @@ public class QuestManager : MonoBehaviour
     }
     public void LoadSavedQuestData(Dictionary<string, EnumQuestStatus> savedQuestIDsStatus)
     {
-        // todo
+
+        //Debug.Log(savedQuestIDsStatus.Count);
+
+        allQuestIDsStatus.Clear();
+        allQuestIDsStatus = savedQuestIDsStatus;
     }
 
 
@@ -162,7 +166,14 @@ public class QuestManager : MonoBehaviour
 
 private bool IsQuestValid(string _id)
     {
-        if (!allQuestIDsStatus.ContainsKey(_id)) { Debug.LogError($"Invalid quest ID"); return false; }
+        if (!allQuestIDsStatus.ContainsKey(_id))
+        {
+            Debug.LogError($"Invalid quest ID {_id}");
+
+            //Debug.Log(allQuestIDsStatus.Keys.Count);
+
+            return false;
+        }
         StructQuestData? data = GetQuestDataByID(_id);
         if (data == null) { Debug.LogError($"Invalid quest ID"); return false; }
         return true;

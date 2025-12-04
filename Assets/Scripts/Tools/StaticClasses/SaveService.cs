@@ -14,6 +14,7 @@ public class StringListWrapper
 [System.Serializable]
 public class SaveData
 {
+    public string notStartedQuestsString;
     public string startedQuestsString;
     public string finishedQuestsString;
     public string obviatedQuestsString;
@@ -59,6 +60,7 @@ public static class SaveService
         List<string> startedQuestIDs = new List<string>();
         List<string> finishedQuestIDs = new List<string>();
         List<string> obviatedQuestIDs = new List<string>();
+        List<string> notStartedQuestIDs = new List<string>();
 
 
         foreach (string _id in inData.questStatus.Keys)
@@ -73,6 +75,9 @@ public static class SaveService
                     break;
                 case EnumQuestStatus.OBVIATED:
                     if (!obviatedQuestIDs.Contains(_id)) { obviatedQuestIDs.Add(_id); }
+                    break;
+                case EnumQuestStatus.NOT_STARTED:
+                    if (!notStartedQuestIDs.Contains(_id)) { notStartedQuestIDs.Add(_id); }
                     break;
                 default: break;
             }
@@ -91,9 +96,15 @@ public static class SaveService
         obviatedQuestsWrapper.strings = obviatedQuestIDs;
         string obviatedQuestsString = JsonUtility.ToJson(obviatedQuestsWrapper);
 
+        StringListWrapper notStartedQuestsWrapper = new StringListWrapper();
+        notStartedQuestsWrapper.strings = notStartedQuestIDs;
+        string notStartedQuestsString = JsonUtility.ToJson(notStartedQuestsWrapper);
+
         outData.startedQuestsString = startedQuestsString;
         outData.finishedQuestsString = finishedQuestsString;
         outData.obviatedQuestsString= obviatedQuestsString;
+        outData.notStartedQuestsString= notStartedQuestsString;
+
         outData.timePlayed = inData.timePlayedSeconds;
 
         return outData;
@@ -107,10 +118,12 @@ public static class SaveService
         List<string> startedList = GetStringListFromJson(inData.startedQuestsString);
         List<string> finishedList = GetStringListFromJson(inData.finishedQuestsString);
         List<string> obviatedList = GetStringListFromJson(inData.obviatedQuestsString);
+        List<string> notStartedList = GetStringListFromJson(inData.notStartedQuestsString);
 
         foreach(string questID in startedList) { questsStatus[questID] = EnumQuestStatus.STARTED; }
         foreach(string questID in finishedList) { questsStatus[questID] = EnumQuestStatus.FINISHED; }
         foreach(string questID in obviatedList) { questsStatus[questID] = EnumQuestStatus.OBVIATED; }
+        foreach(string questID in notStartedList) { questsStatus[questID] = EnumQuestStatus.NOT_STARTED; }
 
         outData.questStatus = questsStatus;
         outData.timePlayedSeconds = inData.timePlayed;
