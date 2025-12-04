@@ -71,8 +71,11 @@ public class QuestManager : MonoBehaviour
             Debug.LogError("Quest must be in a NOT_STARTED state to start"); return;
         }
         allQuestIDsStatus[_id] = EnumQuestStatus.STARTED;
+
+        ServiceManager.Instance.Game.RefreshGameState();
+
         questStartedEvent.TriggerEvent(_id);
-        Debug.Log($"Quest started: {data.Value.questDescription}");
+        //Debug.Log($"Quest started: {data.Value.questDescription}");
 
 
     }
@@ -94,8 +97,15 @@ public class QuestManager : MonoBehaviour
                 StartQuest(startedQuest);
             }
         }
+
+        ServiceManager.Instance.Game.RefreshGameState();
+
         questFinishedEvent.TriggerEvent(_id);
         Debug.Log($"Quest finished: {data.Value.questDescription}");
+
+
+        // TEMP
+        //ServiceManager.Instance.Game.SaveGame();
 
     }
 

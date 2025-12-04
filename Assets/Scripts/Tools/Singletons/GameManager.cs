@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-//using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//using static UnityEditor.Timeline.Actions.MenuPriority;
+using Events;
 
 
 public enum EnumQuestStatus
@@ -16,14 +15,12 @@ public enum EnumQuestStatus
 [System.Serializable]
 public class GameStateData
 {
-    public List<string> inventoryItemIDs;
-    public int timePlayedSeconds;
+    public float timePlayedSeconds;
     public Dictionary<string, EnumQuestStatus> questStatus;
 
     public GameStateData()
     {
-        inventoryItemIDs = new List<string>();
-        timePlayedSeconds = 0;
+        timePlayedSeconds = 0f;
         questStatus = new Dictionary<string, EnumQuestStatus>();
     }
 }
@@ -32,37 +29,50 @@ public class GameManager : MonoBehaviour
 {
 
     [SerializeField] private GameObject testingCanvas;
-
     [SerializeField] private string defaultGameplaySceneName;
+
+    [SerializeField] private EmptyPayloadEvent gameSavedEvent;
+    [SerializeField] private EmptyPayloadEvent saveLoadedEvent;
+
     private UIManager ui;
     private QuestManager qm;
 
     private GameStateData currentGameStateData;
+    public GameStateData CurrentGameStateData { get => currentGameStateData; }
 
     private void Start()
     {
+
+
         ui = ServiceManager.Instance.UI;
         qm = ServiceManager.Instance.Quests;
 
-        if (!GetSavedGameExists())
+        if (!SaveService.SaveExists())
         {
+            Debug.Log("NEW GAME");
             qm.InitializeQuests();
             currentGameStateData = BuildGameStateData();
+            saveLoadedEvent.TriggerEvent();
+
         }
         else
         {
-            // TODO...
+            Debug.Log("LOADING SAVED GAME");
+            currentGameStateData = SaveService.Load();
+            qm.LoadSavedQuestData(currentGameStateData.questStatus);
+            saveLoadedEvent.TriggerEvent();
         }
+    }
+    public void RefreshGameState()
+    {
+        currentGameStateData = BuildGameStateData();
     }
 
     private GameStateData BuildGameStateData()
     {
         GameStateData data = new GameStateData();
         data.questStatus = new Dictionary<string, EnumQuestStatus>(qm.QuestStatus);
-
-        // todo get the seconds played from somewhere
-        // todo get the current inventory status
-
+        data.timePlayedSeconds = Time.time;
         return data;
     }
 
@@ -83,9 +93,17 @@ public class GameManager : MonoBehaviour
         ui.ShowHud();
         testingCanvas.SetActive(true); // temp...
 
+        
+
         //QuestManager qm = ServiceManager.Instance.Quests;
         //ui.ShowLoadingScreen();
         //SceneManager.LoadScene(defaultGameplaySceneName);
+    }
+
+    public void SaveGame()
+    {
+        currentGameStateData = BuildGameStateData();
+        SaveService.Save(currentGameStateData);
     }
 
     ////////////////////
@@ -102,10 +120,5 @@ public class GameManager : MonoBehaviour
     // HELPERS //
     /////////////
     
-
-    private bool GetSavedGameExists()
-    {
-        return false; // <-- placeholder logic
-    }
 
 }

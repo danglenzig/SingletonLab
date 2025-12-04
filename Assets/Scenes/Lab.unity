@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Do a little dance
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -543,6 +543,7 @@ MonoBehaviour:
   questThreeID: 93cc8a7c-1d0f-4237-8f56-5467cb86df88
   questFinishedEvent: {fileID: 11400000, guid: a153aff9b19a29e4689c6f71277711e7, type: 2}
   questStartedEvent: {fileID: 11400000, guid: ed3bff62e4cca1e45b312be265217fba, type: 2}
+  saveLoadedEvent: {fileID: 11400000, guid: 48c280a7f1893d74fbfaee2d1870c1e9, type: 2}
 --- !u!1 &337168021
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,7 +685,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 337, y: -219.65}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &404305759
 MonoBehaviour:
@@ -1597,7 +1598,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -371, y: -219.65}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1352957726
 MonoBehaviour:
@@ -1730,7 +1731,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -219.65}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 200, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1419953734
 MonoBehaviour:
@@ -2019,7 +2020,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Make a little love
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2647,6 +2648,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   testingCanvas: {fileID: 337168021}
   defaultGameplaySceneName: 
+  gameSavedEvent: {fileID: 11400000, guid: 90b5dc241ccc5f045a242595415bf375, type: 2}
+  saveLoadedEvent: {fileID: 11400000, guid: 48c280a7f1893d74fbfaee2d1870c1e9, type: 2}
 --- !u!1 &2094349978
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,7 +2707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Get down tonight
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
