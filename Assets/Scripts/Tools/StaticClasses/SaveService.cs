@@ -134,16 +134,9 @@ public static class SaveService
     private static List<string> GetStringListFromJson(string inString)
     {
         List<string> outList = new List<string>();
-
         if (string.IsNullOrEmpty(inString)) { return outList; }
-
         StringListWrapper wrapper = JsonUtility.FromJson<StringListWrapper>(inString);
-
         outList = wrapper.strings;
-
         return outList;
     }
-
-
-
 }

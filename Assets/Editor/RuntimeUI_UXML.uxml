@@ -1,0 +1,28 @@
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ui="UnityEngine.UIElements"
+    xmlns:uie="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
+>
+    
+</ui:UXML>
+-->
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:VisualElement style="flex-grow: 1;">
+
+        <ui:Label text="This be a Label" name = "titleLabel"/>
+
+        <ui:Button text="This be a Button" name="testButton"/>
+
+        <ui:Toggle label="Display da counter?" name="testToggle"/>
+
+        <ui:TextField label="Type some shit:" text="filla' text" name="inpoot-message"/>
+
+         <ui:Label text="" name = "messageLabel"/>
+
+    </ui:VisualElement>
+</ui:UXML>
+
+
