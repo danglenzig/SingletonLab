@@ -18,6 +18,9 @@ public class SaveData
     public string startedQuestsString;
     public string finishedQuestsString;
     public string obviatedQuestsString;
+
+    public string currentSceneName;
+
     public float timePlayed;
 }
 
@@ -105,6 +108,8 @@ public static class SaveService
         outData.obviatedQuestsString= obviatedQuestsString;
         outData.notStartedQuestsString= notStartedQuestsString;
 
+        outData.currentSceneName = inData.currentSceneName;
+
         outData.timePlayed = inData.timePlayedSeconds;
 
         return outData;
@@ -127,6 +132,7 @@ public static class SaveService
 
         outData.questStatus = questsStatus;
         outData.timePlayedSeconds = inData.timePlayed;
+        outData.currentSceneName = inData.currentSceneName;
         return outData;
     }
 

@@ -48,6 +48,9 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private StringPayloadEvent questFinishedEvent;
     [SerializeField] private StringPayloadEvent questObviatedEvent;
 
+    [SerializeField] private EmptyPayloadEvent questsInitializedEvent;
+    [SerializeField] private EmptyPayloadEvent questsLoadedFromSaveEvent;
+
     private Dictionary<string, EnumQuestStatus> allQuestIDsStatus = new Dictionary<string, EnumQuestStatus>();
     public Dictionary<string, EnumQuestStatus> QuestStatus { get => allQuestIDsStatus; }
 
@@ -71,11 +74,7 @@ public class QuestManager : MonoBehaviour
             Debug.LogError("Quest must be in a NOT_STARTED state to start"); return;
         }
         allQuestIDsStatus[_id] = EnumQuestStatus.STARTED;
-
-        ServiceManager.Instance.Game.RefreshGameState();
-
         questStartedEvent.TriggerEvent(_id);
-        //Debug.Log($"Quest started: {data.Value.questDescription}");
 
 
     }
@@ -97,16 +96,7 @@ public class QuestManager : MonoBehaviour
                 StartQuest(startedQuest);
             }
         }
-
-        ServiceManager.Instance.Game.RefreshGameState();
-
         questFinishedEvent.TriggerEvent(_id);
-        Debug.Log($"Quest finished: {data.Value.questDescription}");
-
-
-        // TEMP
-        //ServiceManager.Instance.Game.SaveGame();
-
     }
 
 
@@ -117,14 +107,13 @@ public class QuestManager : MonoBehaviour
         {
             allQuestIDsStatus[quest.QuestID] = quest.DefaultStatus;
         }
+        questsInitializedEvent.TriggerEvent();
     }
     public void LoadSavedQuestData(Dictionary<string, EnumQuestStatus> savedQuestIDsStatus)
     {
-
-        //Debug.Log(savedQuestIDsStatus.Count);
-
         allQuestIDsStatus.Clear();
         allQuestIDsStatus = savedQuestIDsStatus;
+        questsLoadedFromSaveEvent.TriggerEvent();
     }
 
 

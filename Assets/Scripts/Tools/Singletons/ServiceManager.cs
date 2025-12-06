@@ -9,7 +9,7 @@ public class ServiceManager : Singleton<ServiceManager>
     [SerializeField] private UIDocManager ui;
     //...and so on
 
-    public UIDocManager UI { get => ui; }
+    //public UIDocManager UI { get => ui; }
     public DialogueManager Dialogue { get => dialogue; }
     public GameManager Game { get => game; }
     public QuestManager Quests { get => quests; }
