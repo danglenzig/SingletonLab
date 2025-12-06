@@ -28,52 +28,51 @@ public class GameStateData
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject testingCanvas;
     [SerializeField] private string defaultGameplaySceneName;
 
     [SerializeField] private EmptyPayloadEvent gameSavedEvent;
-    [SerializeField] private EmptyPayloadEvent saveLoadedEvent;
+    //[SerializeField] private EmptyPayloadEvent saveLoadedEvent;
+    [SerializeField] private EmptyPayloadEvent gameDataUpdatedEvent;
 
-    private UIManager ui;
     private QuestManager qm;
 
     private GameStateData currentGameStateData;
     public GameStateData CurrentGameStateData { get => currentGameStateData; }
 
-    private void Start()
+    private void Awake()
     {
-
-
-        ui = ServiceManager.Instance.UI;
-        qm = ServiceManager.Instance.Quests;
-
-        if (!SaveService.SaveExists())
-        {
-            Debug.Log("NEW GAME");
-            qm.InitializeQuests();
-            currentGameStateData = BuildGameStateData();
-            saveLoadedEvent.TriggerEvent();
-
-        }
-        else
-        {
-            Debug.Log("LOADING SAVED GAME");
-            currentGameStateData = SaveService.Load();
-            qm.LoadSavedQuestData(currentGameStateData.questStatus);
-            saveLoadedEvent.TriggerEvent();
-        }
+        
     }
+
+    private void OnNewGameStart()
+    {
+        Debug.Log("NEW GAME");
+        qm.InitializeQuests();
+        BuildGameStateData();
+
+    }
+    private void OnSavedGameStart()
+    {
+        if (qm == null) { qm = ServiceManager.Instance.Quests; }
+        Debug.Log("LOADING SAVED GAME");
+        currentGameStateData = SaveService.Load();
+        gameDataUpdatedEvent.TriggerEvent();
+        qm.LoadSavedQuestData(currentGameStateData.questStatus);
+    }
+
+
     public void RefreshGameState()
     {
-        currentGameStateData = BuildGameStateData();
+        BuildGameStateData();
     }
 
-    private GameStateData BuildGameStateData()
+    private void BuildGameStateData()
     {
         GameStateData data = new GameStateData();
         data.questStatus = new Dictionary<string, EnumQuestStatus>(qm.QuestStatus);
         data.timePlayedSeconds = Time.time;
-        return data;
+        currentGameStateData = data;
+        gameDataUpdatedEvent.TriggerEvent();
     }
 
     private void OnEnable()
@@ -90,8 +89,8 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         currentGameStateData = new GameStateData();
-        ui.ShowHud();
-        testingCanvas.SetActive(true); // temp...
+        //ui.ShowHud();
+        //testingCanvas.SetActive(true); // temp...
 
         
 
@@ -102,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        currentGameStateData = BuildGameStateData();
+        BuildGameStateData();
         SaveService.Save(currentGameStateData);
     }
 
@@ -110,11 +109,12 @@ public class GameManager : MonoBehaviour
     // EVENT HANDLERS //
     ////////////////////
     
+    
     private void HandleOnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        if (ui == null) { ui = ServiceManager.Instance.UI; }
-        ui.ShowHud();
+        
     }
+    
 
     /////////////
     // HELPERS //
