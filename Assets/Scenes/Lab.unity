@@ -677,6 +677,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51914ca97e8fd2a4fbeb5b66f250d7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameScene
+  defaultPlayerStart: {fileID: 0}
+  northPlayerStart: {fileID: 0}
+  southPlayerStart: {fileID: 0}
+  eastPlayerStart: {fileID: 0}
+  westPlayerStart: {fileID: 0}
 --- !u!1 &399263404
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,6 +967,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
   testInputEvent: {fileID: 11400000, guid: 1c021f34e1a3eaf41b6061197d6f6c79, type: 2}
   pauseInputEvent: {fileID: 11400000, guid: a14928544727a254885a8f8689deaf94, type: 2}
+  moveInputEvent: {fileID: 11400000, guid: 4984bd0ff95cb3c48bb0dcb03c68e4f6, type: 2}
 --- !u!1 &498342466
 GameObject:
   m_ObjectHideFlags: 0
@@ -1919,6 +1925,7 @@ MonoBehaviour:
   steps: 100
   blackingPanel: {fileID: 1531565154}
   defaultIsVisible: 0
+  fadeCompleteEvent: {fileID: 11400000, guid: 3e23ee94fcd057a41b3dcd3f041273b0, type: 2}
 --- !u!1 &1453844995
 GameObject:
   m_ObjectHideFlags: 0
@@ -2892,6 +2899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   defaultGameplaySceneName: Scene_00
+  playerPrefab: {fileID: 1668667604009412901, guid: 624e0c629d0bf944a8855cec1a1d96d2, type: 3}
   newGamePressedEvent: {fileID: 11400000, guid: d67c68c8d0f0c794781b6e2871b84137, type: 2}
   continuePressedEvent: {fileID: 11400000, guid: 8d6b11f8cbd6dcc438f5d8d373a45512, type: 2}
   quitPressedEvent: {fileID: 11400000, guid: 14abaca9cbd116d4eb934d4e84e51abd, type: 2}

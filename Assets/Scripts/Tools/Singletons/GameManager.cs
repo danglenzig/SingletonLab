@@ -30,6 +30,7 @@ public class GameStateData
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private string defaultGameplaySceneName;
+    [SerializeField] private GameObject playerPrefab;
 
     [Header("UI Event Channels")]
     [SerializeField] private EmptyPayloadEvent newGamePressedEvent;
@@ -44,7 +45,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EmptyPayloadEvent pauseInputEvent;
 
 
-    //private QuestManager qm;
+
+    private EnumPlayerStart playerStart = EnumPlayerStart.DEFAULT;
     private GameStateData currentGameStateData;
     public GameStateData CurrentGameStateData { get => currentGameStateData; }
 
@@ -112,6 +114,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void SetPlayerStart(EnumPlayerStart _playerStart)
+    {
+        playerStart = _playerStart;
+    }
+
     ////////////////////
     // EVENT HANDLERS //
     ////////////////////
@@ -121,11 +128,16 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name == ServiceManager.Instance.BootstrapSceneName) return;
         BuildGameStateData();
+        GameScene gameScene = GameObject.FindFirstObjectByType<GameScene>();
+        if (gameScene == null) return;
+        gameScene.SpawnPlayerAtPlayerStart(playerPrefab, playerStart);
+
     }
 
     private void StartNewGame()
     {
         ServiceManager.Instance.Quests.InitializeQuests();
+        playerStart = EnumPlayerStart.DEFAULT;
         FadeToScene(defaultGameplaySceneName);
     }
 

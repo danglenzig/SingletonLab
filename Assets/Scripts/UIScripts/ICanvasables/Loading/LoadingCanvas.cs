@@ -1,4 +1,5 @@
 using UnityEngine;
+using Events;
 using UnityEngine.UI;
 
 public class LoadingCanvas : MonoBehaviour, ICanvasable
@@ -7,6 +8,7 @@ public class LoadingCanvas : MonoBehaviour, ICanvasable
     [SerializeField] private Image blackingPanel;
 
     [SerializeField] private bool defaultIsVisible = false;
+    [SerializeField] private EmptyPayloadEvent fadeCompleteEvent;
     private EnumCanvasName canvasName = EnumCanvasName.LOADING;
     public EnumCanvasName CanvasName { get => canvasName; }
 
@@ -44,6 +46,7 @@ public class LoadingCanvas : MonoBehaviour, ICanvasable
         }
         ServiceManager.Instance.CanvasMgr.DisplayCanvas(toCanv);
         blackingPanel.color = new Color(0f, 0f, 0f, 1f);
+        fadeCompleteEvent.TriggerEvent();
     }
 
     ///////////////////////
