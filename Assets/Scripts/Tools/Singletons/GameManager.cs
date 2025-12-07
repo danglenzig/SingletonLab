@@ -29,22 +29,22 @@ public class GameStateData
 
 public class GameManager : MonoBehaviour
 {
-    private const string BOOTSTRAP_SCENE = "Lab";
-
-
     [SerializeField] private string defaultGameplaySceneName;
 
-    [Header("Event Channels")]
+    [Header("UI Event Channels")]
     [SerializeField] private EmptyPayloadEvent newGamePressedEvent;
+    [SerializeField] private EmptyPayloadEvent continuePressedEvent;
+    [SerializeField] private EmptyPayloadEvent quitPressedEvent;
 
-    [SerializeField] private StringPayloadEvent questStartedEvent;
-    [SerializeField] private StringPayloadEvent questFinishedEvent;
-    [SerializeField] private StringPayloadEvent questObviatedEvent;
+    [Header("Quest Event Channels")]
     [SerializeField] private EmptyPayloadEvent questsInitializedEvent;
     [SerializeField] private EmptyPayloadEvent questsLoadedFromSaveEvent;
 
+    [Header("Input Event Channels")]
+    [SerializeField] private EmptyPayloadEvent pauseInputEvent;
 
-    private QuestManager qm;
+
+    //private QuestManager qm;
     private GameStateData currentGameStateData;
     public GameStateData CurrentGameStateData { get => currentGameStateData; }
 
@@ -53,10 +53,21 @@ public class GameManager : MonoBehaviour
         
     }
 
+    private void Start()
+    {
+        ServiceManager.Instance.CanvasMgr.DisplayCanvas(EnumCanvasName.MAIN_MENU);
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += HandleOnSceneLoaded;
+
+        //UI Events
         newGamePressedEvent.OnEventTriggered += StartNewGame;
+        continuePressedEvent.OnEventTriggered += LoadSavedGame;
+        quitPressedEvent.OnEventTriggered += QuitGame;
+
+        // Quest events
         questsInitializedEvent.OnEventTriggered += BuildGameStateData;
         questsLoadedFromSaveEvent.OnEventTriggered += BuildGameStateData;
 
@@ -64,7 +75,13 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= HandleOnSceneLoaded;
+
+        //UI Events
         newGamePressedEvent.OnEventTriggered -= StartNewGame;
+        continuePressedEvent.OnEventTriggered -= LoadSavedGame;
+        quitPressedEvent.OnEventTriggered -= QuitGame;
+
+        // Quest events
         questsInitializedEvent.OnEventTriggered -= BuildGameStateData;
         questsLoadedFromSaveEvent.OnEventTriggered -= BuildGameStateData;
     }
@@ -72,10 +89,11 @@ public class GameManager : MonoBehaviour
     private void BuildGameStateData()
     {
         Debug.Log("Building CurrentGameStateData");
-
+        QuestManager qm = ServiceManager.Instance.Quests;
         GameStateData data = new GameStateData();
         data.questStatus = new Dictionary<string, EnumQuestStatus>(qm.QuestStatus);
         data.timePlayedSeconds = Time.time;
+        data.currentSceneName = SceneManager.GetActiveScene().name;
         currentGameStateData = data;
     }
 
@@ -85,6 +103,15 @@ public class GameManager : MonoBehaviour
         SaveService.Save(currentGameStateData);
     }
 
+    public void FadeToScene(string sceneName)
+    {
+        CanvasManager cm = ServiceManager.Instance.CanvasMgr;
+        cm.DisplayCanvas(EnumCanvasName.LOADING);
+        LoadingCanvas loadCanv = cm.GetIcanvasable(EnumCanvasName.LOADING) as LoadingCanvas;
+        loadCanv.FadeIn(1.0f, 1.0f, EnumCanvasName.HUD);
+        SceneManager.LoadScene(sceneName);
+    }
+
     ////////////////////
     // EVENT HANDLERS //
     ////////////////////
@@ -92,23 +119,30 @@ public class GameManager : MonoBehaviour
     
     private void HandleOnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        if (scene.name == BOOTSTRAP_SCENE) return;
-        currentGameStateData.currentSceneName = scene.name;
+        if (scene.name == ServiceManager.Instance.BootstrapSceneName) return;
         BuildGameStateData();
     }
 
     private void StartNewGame()
     {
-        Debug.Log("Foo");
-        //ServiceManager.Instance.Quests.InitializeQuests();
-        //SceneManager.LoadScene(defaultGameplaySceneName);
+        ServiceManager.Instance.Quests.InitializeQuests();
+        FadeToScene(defaultGameplaySceneName);
     }
 
     private void LoadSavedGame()
     {
         currentGameStateData = SaveService.Load();
         ServiceManager.Instance.Quests.LoadSavedQuestData(currentGameStateData.questStatus);
-        SceneManager.LoadScene(currentGameStateData.currentSceneName);
+        FadeToScene(currentGameStateData.currentSceneName);
+    }
+
+
+
+    private void QuitGame()
+    {
+        if (UnityEditor.EditorApplication.isPlaying) { UnityEditor.EditorApplication.isPlaying = false; return; }
+        Application.Quit();
+
     }
 
 

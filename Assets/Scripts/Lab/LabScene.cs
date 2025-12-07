@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class LabScene : MonoBehaviour
 {
+    /*
 
     [SerializeField] private string questOneID;
     [SerializeField] private string questTwoID;
@@ -18,7 +19,6 @@ public class LabScene : MonoBehaviour
     private void Start()
     {
         
-        sm = ServiceManager.Instance;
     }
 
     private void OnEnable()
@@ -45,5 +45,6 @@ public class LabScene : MonoBehaviour
     {
         
     }
+    */
 
 }

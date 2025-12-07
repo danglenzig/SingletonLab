@@ -1,3 +1,4 @@
+/*
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
@@ -69,14 +70,6 @@ public class UIDocManager : MonoBehaviour
 
         UIDocument doc = GetUIDocFromName(canv);
         if (doc != null) { doc.sortingOrder = FOCUS_SORT_ORDER; doc.enabled = true; }
-
-        /*
-        VisualElement root = GetVisualElementFromName(canv);
-        if(root != null)
-        {
-            root.SetEnabled(true);
-        }
-        */
     }
     private void ClearCanvases()
     {
@@ -85,13 +78,6 @@ public class UIDocManager : MonoBehaviour
             doc.sortingOrder = DISABLED_SORT_ORDER;
             doc.enabled = false;
         }
-
-        /*
-        foreach (VisualElement root in veRoots)
-        {   
-            root.SetEnabled(false);
-        }
-        */
     }
     private VisualElement GetVisualElementFromName(EnumCanvasName canv)
     {
@@ -128,3 +114,4 @@ public class UIDocManager : MonoBehaviour
         }
     }
 }
+*/
