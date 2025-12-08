@@ -192,8 +192,11 @@ public class GameManager : MonoBehaviour
 
     private void QuitGame()
     {
+# if UNITY_EDITOR
         if (UnityEditor.EditorApplication.isPlaying) { UnityEditor.EditorApplication.isPlaying = false; return; }
+#else
         Application.Quit();
+#endif
 
     }
 
