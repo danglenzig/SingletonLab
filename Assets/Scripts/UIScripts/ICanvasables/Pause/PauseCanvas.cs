@@ -1,8 +1,21 @@
 using UnityEngine;
+using Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseCanvas : MonoBehaviour, ICanvasable
 {
+    private enum EnumButtonName
+    {
+        SAVE,
+        MAIN
+    }
+
+    [SerializeField] private Button saveButton;
+    [SerializeField] private Button mainMenuButton;
+
+    [SerializeField] private EmptyPayloadEvent saveGamePressedEvent;
+    [SerializeField] private EmptyPayloadEvent gameSavedEvent;
 
     [SerializeField] private bool defaultIsVisible = false;
     private EnumCanvasName canvasName = EnumCanvasName.PAUSE;
@@ -22,6 +35,39 @@ public class PauseCanvas : MonoBehaviour, ICanvasable
         }
     }
     public bool IsVisible { get => isVisible; }
+
+    private void OnEnable()
+    {
+        saveButton.onClick.AddListener( () => HandleButtonClick(EnumButtonName.SAVE));
+        mainMenuButton.onClick.AddListener(() => HandleButtonClick(EnumButtonName.MAIN));
+        gameSavedEvent.OnEventTriggered += HandleOnGameSaved;
+    }
+    private void OnDisable()
+    {
+        saveButton.onClick.RemoveAllListeners();
+        mainMenuButton.onClick.RemoveAllListeners();
+        gameSavedEvent.OnEventTriggered -= HandleOnGameSaved;
+    }
+
+    private void HandleButtonClick(EnumButtonName buttName)
+    {
+        switch (buttName)
+        {
+            case EnumButtonName.SAVE:
+                saveGamePressedEvent.TriggerEvent();
+                return;
+            case EnumButtonName.MAIN:
+                string sceneName = ServiceManager.Instance.BootstrapSceneName;
+                SceneManager.LoadScene(sceneName);
+                return;
+            default: return;
+        }
+    }
+    private void HandleOnGameSaved()
+    {
+        // visual confirmation feedback
+        Debug.Log("Pause menu says: game saved");
+    }
 
     ///////////////////////
     // Interface Methods //

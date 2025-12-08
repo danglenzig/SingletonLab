@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EmptyPayloadEvent newGamePressedEvent;
     [SerializeField] private EmptyPayloadEvent continuePressedEvent;
     [SerializeField] private EmptyPayloadEvent quitPressedEvent;
+    [SerializeField] private EmptyPayloadEvent saveGamePressedEvent;
 
     [Header("Quest Event Channels")]
     [SerializeField] private EmptyPayloadEvent questsInitializedEvent;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game EventChannels")]
     [SerializeField] private BoolPayloadEvent gameIsPausedEvent;
+    [SerializeField] private EmptyPayloadEvent gameSavedEvent;
 
     private bool gameIsPaused = false;
 
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         newGamePressedEvent.OnEventTriggered += StartNewGame;
         continuePressedEvent.OnEventTriggered += LoadSavedGame;
         quitPressedEvent.OnEventTriggered += QuitGame;
+        saveGamePressedEvent.OnEventTriggered += SaveGame;
 
         // Quest events
         questsInitializedEvent.OnEventTriggered += BuildGameStateData;
@@ -88,6 +91,7 @@ public class GameManager : MonoBehaviour
         newGamePressedEvent.OnEventTriggered -= StartNewGame;
         continuePressedEvent.OnEventTriggered -= LoadSavedGame;
         quitPressedEvent.OnEventTriggered -= QuitGame;
+        saveGamePressedEvent.OnEventTriggered -= SaveGame;
 
         // Quest events
         questsInitializedEvent.OnEventTriggered -= BuildGameStateData;
@@ -100,19 +104,25 @@ public class GameManager : MonoBehaviour
 
     private void BuildGameStateData()
     {
-        Debug.Log("Building CurrentGameStateData");
+        //Debug.Log("Building CurrentGameStateData");
         QuestManager qm = ServiceManager.Instance.Quests;
         GameStateData data = new GameStateData();
         data.questStatus = new Dictionary<string, EnumQuestStatus>(qm.QuestStatus);
         data.timePlayedSeconds = Time.time;
         data.currentSceneName = SceneManager.GetActiveScene().name;
         currentGameStateData = data;
+
+        DebugCurrentGameData();
     }
 
     private void SaveGame()
     {
         BuildGameStateData();
         SaveService.Save(currentGameStateData);
+        gameSavedEvent.TriggerEvent();
+
+        DebugCurrentGameData();
+
     }
 
     public void FadeToScene(string sceneName)
@@ -166,11 +176,22 @@ public class GameManager : MonoBehaviour
 
     private void HandleOnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        if (scene.name == ServiceManager.Instance.BootstrapSceneName) return;
+        if (scene.name == ServiceManager.Instance.BootstrapSceneName)
+        {
+            gameIsPaused = false;
+            gameIsPausedEvent.TriggerEvent(gameIsPaused);
+            ServiceManager.Instance.CanvasMgr.DisplayCanvas(EnumCanvasName.MAIN_MENU);
+            //BuildGameStateData();
+            return;
+        }
+
+
         BuildGameStateData();
         GameScene gameScene = GameObject.FindFirstObjectByType<GameScene>();
         if (gameScene == null) return;
         gameScene.SpawnPlayerAtPlayerStart(playerPrefab, playerStart);
+
+        //DebugCurrentGameData();
 
     }
 
@@ -179,13 +200,16 @@ public class GameManager : MonoBehaviour
         ServiceManager.Instance.Quests.InitializeQuests();
         playerStart = EnumPlayerStart.DEFAULT;
         FadeToScene(defaultGameplaySceneName);
+        
+        //DebugCurrentGameData();
     }
 
     private void LoadSavedGame()
     {
-        currentGameStateData = SaveService.Load();
-        ServiceManager.Instance.Quests.LoadSavedQuestData(currentGameStateData.questStatus);
-        FadeToScene(currentGameStateData.currentSceneName);
+
+        GameStateData savedData = SaveService.Load();
+        ServiceManager.Instance.Quests.LoadSavedQuestData(savedData.questStatus);
+        FadeToScene(savedData.currentSceneName);
     }
 
 
@@ -205,5 +229,18 @@ public class GameManager : MonoBehaviour
     // HELPERS //
     /////////////
 
+    private void DebugCurrentGameData()
+    {
+        string questStr = "";
 
+        foreach(string key in currentGameStateData.questStatus.Keys)
+        {
+            questStr += $"{key} -- {currentGameStateData.questStatus[key]}\n";
+        }
+
+
+        string debugStr = $"Current game data\nQuests:\n{questStr}\nTime played: {currentGameStateData.timePlayedSeconds}\nScene: {currentGameStateData.currentSceneName}\n\n";
+
+        Debug.Log(debugStr);
+    }
 }
