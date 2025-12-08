@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8794725976829316561}
   - component: {fileID: 5700501479805178031}
   - component: {fileID: 2520080663979393590}
+  - component: {fileID: 9068752325049172209}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -48,7 +49,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 6
-  moveInputEvent: {fileID: 11400000, guid: 4984bd0ff95cb3c48bb0dcb03c68e4f6, type: 2}
   fadeCompleteEvent: {fileID: 11400000, guid: 3e23ee94fcd057a41b3dcd3f041273b0, type: 2}
 --- !u!58 &5700501479805178031
 CircleCollider2D:
@@ -113,6 +113,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9068752325049172209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668667604009412901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8343ddefba35594b964e17775668506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStateMachine
+  stateMachine: {fileID: 11400000, guid: 08946c2ca1d6bc44c8c3860f5b19dd63, type: 2}
+  moveInputEvent: {fileID: 11400000, guid: 4984bd0ff95cb3c48bb0dcb03c68e4f6, type: 2}
+  gameIsPausedEvent: {fileID: 11400000, guid: 932258193f438dd4187de1c0f99abf2f, type: 2}
 --- !u!1 &5704855074479671415
 GameObject:
   m_ObjectHideFlags: 0

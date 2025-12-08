@@ -45,6 +45,9 @@ public class CanvasManager : MonoBehaviour
     private List<ICanvasable> canvases = new List<ICanvasable>();
     private List<EnumCanvasName> activeCanvasHistory = new List<EnumCanvasName>();
 
+    public EnumCanvasName CurrentActiveCanvas { get => currentActiveCanvas; }
+    public List<EnumCanvasName> ActiveCanvasHistory { get => activeCanvasHistory; }
+
     private void Awake()
     {
         // There can be only one!

@@ -2328,8 +2328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 3.085022, y: -3.6950378}
+  m_SizeDelta: {x: 20.569996, y: 16.94992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1531565154
 MonoBehaviour:
@@ -2906,6 +2906,7 @@ MonoBehaviour:
   questsInitializedEvent: {fileID: 11400000, guid: 823f6a956b464ca48874304691fa5bd5, type: 2}
   questsLoadedFromSaveEvent: {fileID: 11400000, guid: fa38f1afc36c9cd4f8012ca600be5565, type: 2}
   pauseInputEvent: {fileID: 11400000, guid: a14928544727a254885a8f8689deaf94, type: 2}
+  gameIsPausedEvent: {fileID: 11400000, guid: 932258193f438dd4187de1c0f99abf2f, type: 2}
 --- !u!1 &2119326871
 GameObject:
   m_ObjectHideFlags: 0

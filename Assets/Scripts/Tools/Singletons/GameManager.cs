@@ -44,7 +44,10 @@ public class GameManager : MonoBehaviour
     [Header("Input Event Channels")]
     [SerializeField] private EmptyPayloadEvent pauseInputEvent;
 
+    [Header("Game EventChannels")]
+    [SerializeField] private BoolPayloadEvent gameIsPausedEvent;
 
+    private bool gameIsPaused = false;
 
     private EnumPlayerStart playerStart = EnumPlayerStart.DEFAULT;
     private GameStateData currentGameStateData;
@@ -73,6 +76,9 @@ public class GameManager : MonoBehaviour
         questsInitializedEvent.OnEventTriggered += BuildGameStateData;
         questsLoadedFromSaveEvent.OnEventTriggered += BuildGameStateData;
 
+        // Input events
+        pauseInputEvent.OnEventTriggered += HandleOnPausePressed;
+
     }
     private void OnDisable()
     {
@@ -86,6 +92,10 @@ public class GameManager : MonoBehaviour
         // Quest events
         questsInitializedEvent.OnEventTriggered -= BuildGameStateData;
         questsLoadedFromSaveEvent.OnEventTriggered -= BuildGameStateData;
+
+        // Input events
+        pauseInputEvent.OnEventTriggered -= HandleOnPausePressed;
+
     }
 
     private void BuildGameStateData()
@@ -123,7 +133,37 @@ public class GameManager : MonoBehaviour
     // EVENT HANDLERS //
     ////////////////////
     
-    
+    private void HandleOnPausePressed()
+    {
+        CanvasManager cm = ServiceManager.Instance.CanvasMgr;
+        if (!gameIsPaused && cm.CurrentActiveCanvas == EnumCanvasName.HUD)
+        {
+            gameIsPaused = true;
+            cm.DisplayCanvas(EnumCanvasName.PAUSE);
+            Debug.Log("PAUSE");
+            gameIsPausedEvent.TriggerEvent(gameIsPaused);
+            return;
+        }
+        if (gameIsPaused)
+        {
+            gameIsPaused = false;
+            EnumCanvasName prev = cm.ActiveCanvasHistory[cm.ActiveCanvasHistory.Count - 1];
+            cm.DisplayCanvas(prev);
+            Debug.Log("UNPAUSE");
+            gameIsPausedEvent.TriggerEvent(gameIsPaused);
+            return;
+        }
+
+    }
+
+    private void HandleOnMainMenuPressed()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(ServiceManager.Instance.BootstrapSceneName);
+        CanvasManager cm = ServiceManager.Instance.CanvasMgr;
+        cm.DisplayCanvas(EnumCanvasName.MAIN_MENU);
+    }
+
     private void HandleOnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
         if (scene.name == ServiceManager.Instance.BootstrapSceneName) return;

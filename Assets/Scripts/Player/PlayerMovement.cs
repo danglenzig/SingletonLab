@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
     private const float BLOCKER_DETECT_RADIUS = 0.5f;
 
     [SerializeField] private float moveSpeed = 6.0f;
-    [SerializeField] private Vector2PayloadEvent moveInputEvent;
     [SerializeField] private EmptyPayloadEvent fadeCompleteEvent;
 
     private Collider2D myCollider;
@@ -20,19 +19,22 @@ public class PlayerMovement : MonoBehaviour
     private bool blockedDown = false;
     private bool canMove = false;
 
+    private Rigidbody2D myRB;
+
     private void Awake()
     {
         myCollider = GetComponent<Collider2D>();
+        myRB = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
     {
-        moveInputEvent.OnEventTriggered += IngestMoveInput;
+        //moveInputEvent.OnEventTriggered += IngestMoveInput;
         fadeCompleteEvent.OnEventTriggered += HandleOnFadeComplete;
     }
     private void OnDisable()
     {
-        moveInputEvent.OnEventTriggered -= IngestMoveInput;
+        //moveInputEvent.OnEventTriggered -= IngestMoveInput;
         fadeCompleteEvent.OnEventTriggered -= HandleOnFadeComplete;
     }
 
@@ -57,8 +59,11 @@ public class PlayerMovement : MonoBehaviour
 
         transform.Translate(moveInput * moveSpeed * Time.deltaTime);
     }
-
-    private void IngestMoveInput(Vector2 _moveInput)
+    public void ParkedStateToggled(bool isParked)
+    {
+        myRB.simulated = !isParked;
+    }
+    public void SetMoveInput(Vector2 _moveInput)
     {
         moveInput = _moveInput;
     }
