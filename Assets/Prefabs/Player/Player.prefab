@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5700501479805178031}
   - component: {fileID: 2520080663979393590}
   - component: {fileID: 9068752325049172209}
+  - component: {fileID: 2635824814220512830}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -34,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 263032233508215742}
+  - {fileID: 1868058559795513702}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8794725976829316561
@@ -128,6 +130,20 @@ MonoBehaviour:
   stateMachine: {fileID: 11400000, guid: 08946c2ca1d6bc44c8c3860f5b19dd63, type: 2}
   moveInputEvent: {fileID: 11400000, guid: 4984bd0ff95cb3c48bb0dcb03c68e4f6, type: 2}
   gameIsPausedEvent: {fileID: 11400000, guid: 932258193f438dd4187de1c0f99abf2f, type: 2}
+  playerSprite: {fileID: 3947128937706327359}
+--- !u!114 &2635824814220512830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668667604009412901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ae938c35d933244a81188e42f656e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerComponentServer
+  playerSpriteComponent: {fileID: 3947128937706327359}
 --- !u!1 &5704855074479671415
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +160,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &263032233508215742
 Transform:
   m_ObjectHideFlags: 0
@@ -218,3 +234,105 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1972466595451358878
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6896614665505497828}
+    m_Modifications:
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1370154673964044350, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043911034147724641, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      propertyPath: m_Name
+      value: MoonMan
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4043911034147724641, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3947128937706327359}
+  m_SourcePrefab: {fileID: 100100000, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+--- !u!4 &1868058559795513702 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 194559372222695416, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+  m_PrefabInstance: {fileID: 1972466595451358878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2540382325424493567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4043911034147724641, guid: 30a77ae528038e744ba3b9cdbb24813c, type: 3}
+  m_PrefabInstance: {fileID: 1972466595451358878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3947128937706327359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2540382325424493567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcbea344826259340a168d883fafdd53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSprite

@@ -55,6 +55,14 @@ public static class SaveService
         return ConvertSavedDataToGameData(savedData);
     }
 
+    public static void ClearSave()
+    {
+        if (File.Exists(SaveFilePath))
+        {
+            File.Delete(SaveFilePath);
+        }
+    }
+
     // Conversion Tools //
     private static SaveData ConvertGameDataToSaveData(GameStateData inData)
     {

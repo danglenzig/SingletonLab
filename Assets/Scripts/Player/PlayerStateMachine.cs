@@ -1,6 +1,6 @@
 using UnityEngine;
 using Events;
-using StateMachine;
+using Constants;using StateMachine;
 
 public class PlayerStateConstants
 {
@@ -20,19 +20,24 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private Vector2PayloadEvent moveInputEvent;
     //[SerializeField] private EmptyPayloadEvent pauseInputEvent;
     [SerializeField] private BoolPayloadEvent gameIsPausedEvent;
+    [SerializeField] private PlayerSprite playerSprite;
 
     private PlayerMovement playerMovement;
     public StateData CurrentPlayerStateData { get => stateMachine.CurrentStateData; }
 
     private void Awake()
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        //playerMovement = GetComponent<PlayerComponentServer>().PlayerMovementComponent;
     }
 
     private void OnEnable()
     {
+        
+
         moveInputEvent.OnEventTriggered += HandleOnMoveInput;
         gameIsPausedEvent.OnEventTriggered += HandleOnPausedChanged;
+        playerSprite.OnAnimationLoopedEvent += HandleOnAnimationLooped;
+        playerSprite.OnAnimationFinishedEvent += HandleOnAnimationFinished;
         foreach(StateSO state in stateMachine.GetStates())
         {
             state.OnStateEntered += HandleOnStateEntered;
@@ -43,6 +48,8 @@ public class PlayerStateMachine : MonoBehaviour
     {
         moveInputEvent.OnEventTriggered -= HandleOnMoveInput;
         gameIsPausedEvent.OnEventTriggered -= HandleOnPausedChanged;
+        playerSprite.OnAnimationLoopedEvent -= HandleOnAnimationLooped;
+        playerSprite.OnAnimationFinishedEvent -= HandleOnAnimationFinished;
         foreach (StateSO state in stateMachine.GetStates())
         {
             state.OnStateEntered -= HandleOnStateEntered;
@@ -52,6 +59,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Start()
     {
+
+        //playerMovement = GetComponent<PlayerComponentServer>().PlayerMovementComponent;
+
         stateMachine.Initialize();
         stateMachine.TriggerTransition(PlayerStateConstants.TO_IDLE_TRANSITION);
     }
@@ -65,6 +75,15 @@ public class PlayerStateMachine : MonoBehaviour
 
     }
     private void HandleOnMovingEntered()
+    {
+
+    }
+
+    private void HandleOnAnimationLooped(EnumPlayerAnimations animName)
+    {
+        //Debug.Log($"{animName.ToString()} looped");
+    }
+    private void HandleOnAnimationFinished(EnumPlayerAnimations animName)
     {
 
     }
@@ -87,7 +106,7 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerStateConstants.PARKED_STATE:
                 return;
             case PlayerStateConstants.IDLE_STATE:
-                if (_moveInput.sqrMagnitude > Mathf.Epsilon)
+                if (_moveInput.sqrMagnitude > Mathf.Epsilon && playerMovement.CanMove)
                 {
                     playerMovement.SetMoveInput(_moveInput);
                     stateMachine.TriggerTransition(PlayerStateConstants.TO_MOVING_TRANSITION);
@@ -102,25 +121,34 @@ public class PlayerStateMachine : MonoBehaviour
                     stateMachine.TriggerTransition(PlayerStateConstants.TO_IDLE_TRANSITION);
                     return;
                 }
+
                 return;
         }
     }
 
     private void HandleOnStateEntered(StateData stateData)
     {
+
+        if (playerMovement == null) { playerMovement = GetComponent<PlayerComponentServer>().PlayerMovementComponent; }
+
         switch (stateData.StateName)
         {
             case PlayerStateConstants.PARKED_STATE:
                 playerMovement.ParkedStateToggled(true);
                 break;
             case PlayerStateConstants.IDLE_STATE:
+                playerSprite.PlayAnimation(EnumPlayerAnimations.IDLE);
                 break;
             case PlayerStateConstants.MOVING_STATE:
+                playerSprite.PlayAnimation(EnumPlayerAnimations.WALK);
                 break;
         }
     }
     private void HandleOnStateExited(StateData stateData)
     {
+
+        if (playerMovement == null) { playerMovement = GetComponent<PlayerComponentServer>().PlayerMovementComponent; }
+
         switch (stateData.StateName)
         {
             case PlayerStateConstants.PARKED_STATE:

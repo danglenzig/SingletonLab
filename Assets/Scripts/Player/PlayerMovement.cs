@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 6.0f;
     [SerializeField] private EmptyPayloadEvent fadeCompleteEvent;
+    //[SerializeField] private PlayerSprite playerSprite;
 
     private Collider2D myCollider;
     private Vector2 moveInput = Vector2.zero;
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private bool blockedUp = false;
     private bool blockedDown = false;
     private bool canMove = false;
+    public bool CanMove { get => canMove; }
 
     private Rigidbody2D myRB;
 
@@ -58,6 +60,32 @@ public class PlayerMovement : MonoBehaviour
         if (blockedDown) { moveInput.y = Mathf.Clamp(moveInput.y, 0f, 1f); }
 
         transform.Translate(moveInput * moveSpeed * Time.deltaTime);
+
+        if (Mathf.Abs(moveInput.x) > Mathf.Epsilon)
+        {
+
+            PlayerSprite playerSprite = GetComponent<PlayerComponentServer>().PlayerSpriteComponent;
+
+            bool movingLeft = moveInput.x < 0;
+            bool needsFlip = (movingLeft && !playerSprite.GetFlipX()) || (!movingLeft && playerSprite.GetFlipX());
+            if (needsFlip) { playerSprite.ToggleFLipX(); }
+            /*
+            if (movingLeft && !playerSprite.GetFlipX())
+            {
+                playerSprite.SetFlipX(true);
+            }
+            else if (!movingLeft && playerSprite.GetFlipX())
+            {
+                playerSprite.SetFlipX(false);
+            }
+            */
+        }
+
+        //Debug.Log(Mathf.Abs(moveInput.x));
+
+        //Debug.Log(Mathf.Sign(moveInput.x));
+
+
     }
     public void ParkedStateToggled(bool isParked)
     {

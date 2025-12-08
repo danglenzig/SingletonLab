@@ -17,5 +17,11 @@ namespace Constants
         public const string SCENE_00 = "Scene_00";
         public const string SCENE_01 = "Scene_01";
     }
+
+    public class PlayerAnimations
+    {
+        public const string WALK = "WALK";
+        public const string IDLE = "IDLE";
+    }
    
 }

@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
     private bool gameIsPaused = false;
 
     private EnumPlayerStart playerStart = EnumPlayerStart.DEFAULT;
+    private bool playerStartFlipX = false;
+
     private GameStateData currentGameStateData;
     public GameStateData CurrentGameStateData { get => currentGameStateData; }
 
@@ -138,6 +140,10 @@ public class GameManager : MonoBehaviour
     {
         playerStart = _playerStart;
     }
+    public void SetPlayerStartFlipX(bool _flipX)
+    {
+        playerStartFlipX = _flipX;
+    }
 
     ////////////////////
     // EVENT HANDLERS //
@@ -189,7 +195,7 @@ public class GameManager : MonoBehaviour
         BuildGameStateData();
         GameScene gameScene = GameObject.FindFirstObjectByType<GameScene>();
         if (gameScene == null) return;
-        gameScene.SpawnPlayerAtPlayerStart(playerPrefab, playerStart);
+        gameScene.SpawnPlayerAtPlayerStart(playerPrefab, playerStart, playerStartFlipX);
 
         //DebugCurrentGameData();
 
@@ -197,6 +203,7 @@ public class GameManager : MonoBehaviour
 
     private void StartNewGame()
     {
+        SaveService.ClearSave();
         ServiceManager.Instance.Quests.InitializeQuests();
         playerStart = EnumPlayerStart.DEFAULT;
         FadeToScene(defaultGameplaySceneName);

@@ -545,6 +545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ExitTrigger
   destinationSceneName: Scene_00
   destinationPlayerStart: 3
+  setFlipXOnStart: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
