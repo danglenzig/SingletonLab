@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5700501479805178031}
   - component: {fileID: 2520080663979393590}
   - component: {fileID: 9068752325049172209}
-  - component: {fileID: 2635824814220512830}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -131,19 +130,6 @@ MonoBehaviour:
   moveInputEvent: {fileID: 11400000, guid: 4984bd0ff95cb3c48bb0dcb03c68e4f6, type: 2}
   gameIsPausedEvent: {fileID: 11400000, guid: 932258193f438dd4187de1c0f99abf2f, type: 2}
   playerSprite: {fileID: 3947128937706327359}
---- !u!114 &2635824814220512830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668667604009412901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1ae938c35d933244a81188e42f656e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerComponentServer
-  playerSpriteComponent: {fileID: 3947128937706327359}
 --- !u!1 &5704855074479671415
 GameObject:
   m_ObjectHideFlags: 0

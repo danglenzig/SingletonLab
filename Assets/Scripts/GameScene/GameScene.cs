@@ -26,7 +26,8 @@ public class GameScene : MonoBehaviour
     public void SpawnPlayerAtPlayerStart(GameObject playerPrefab, EnumPlayerStart playerStart = EnumPlayerStart.DEFAULT, bool flipX = false)
     {
         player = Instantiate(playerPrefab);
-        PlayerSprite playerSprite = player.GetComponent<PlayerComponentServer>().PlayerSpriteComponent;
+        PlayerSprite playerSprite = player.GetComponentInChildren<PlayerSprite>();
+        
         playerSprite.SetFlipX(flipX);
         
         switch (playerStart)

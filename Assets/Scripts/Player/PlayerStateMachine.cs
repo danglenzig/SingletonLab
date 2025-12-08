@@ -27,7 +27,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Awake()
     {
-        //playerMovement = GetComponent<PlayerComponentServer>().PlayerMovementComponent;
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void OnEnable()
@@ -59,9 +59,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Start()
     {
-
-        //playerMovement = GetComponent<PlayerComponentServer>().PlayerMovementComponent;
-
         stateMachine.Initialize();
         stateMachine.TriggerTransition(PlayerStateConstants.TO_IDLE_TRANSITION);
     }
@@ -128,9 +125,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleOnStateEntered(StateData stateData)
     {
-
-        if (playerMovement == null) { playerMovement = GetComponent<PlayerComponentServer>().PlayerMovementComponent; }
-
         switch (stateData.StateName)
         {
             case PlayerStateConstants.PARKED_STATE:
@@ -146,9 +140,6 @@ public class PlayerStateMachine : MonoBehaviour
     }
     private void HandleOnStateExited(StateData stateData)
     {
-
-        if (playerMovement == null) { playerMovement = GetComponent<PlayerComponentServer>().PlayerMovementComponent; }
-
         switch (stateData.StateName)
         {
             case PlayerStateConstants.PARKED_STATE:

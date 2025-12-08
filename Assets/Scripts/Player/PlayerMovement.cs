@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         if (Mathf.Abs(moveInput.x) > Mathf.Epsilon)
         {
 
-            PlayerSprite playerSprite = GetComponent<PlayerComponentServer>().PlayerSpriteComponent;
+            PlayerSprite playerSprite = GetComponentInChildren<PlayerSprite>();
 
             bool movingLeft = moveInput.x < 0;
             bool needsFlip = (movingLeft && !playerSprite.GetFlipX()) || (!movingLeft && playerSprite.GetFlipX());
