@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EVENT_SYSTEM
   - PLAYER_BLOCKER
+  - PAUSE_CANVAS_VIEW
   layers:
   - Default
   - TransparentFX

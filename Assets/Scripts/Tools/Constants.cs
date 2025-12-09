@@ -5,6 +5,8 @@ namespace Constants
     {
         public const string TAG_EVENT_SYSTEM = "EVENT_SYSTEM";
         public const string TAG_PLAYER_BLOCKER = "PLAYER_BLOCKER";
+
+        public const string TAG_PAUSE_CANVAS_VIEW = "PAUSE_CANVAS_VIEW";
     }
 
     public class LayerMasks
