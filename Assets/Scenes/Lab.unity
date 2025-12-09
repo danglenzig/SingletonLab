@@ -1625,7 +1625,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 309}
   m_SizeDelta: {x: 1280, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &498342468
@@ -4604,6 +4604,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9707606a71eb444ae075a049b13cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  dialogueTriggeredEvent: {fileID: 11400000, guid: 3e07e38cea326e54986d2db7b5bfe42f, type: 2}
+  dialogueFinishedEvent: {fileID: 11400000, guid: 73d68854d96f70748b5acbd3d6417328, type: 2}
+  onConversationStartedEvent: {fileID: 11400000, guid: 9c0e42ad1d2878b46aa4f1b5da70fbdc, type: 2}
+  onConversationEndedEvent: {fileID: 11400000, guid: a56cc13b6c336084db36ce22489565d5, type: 2}
+  onLineRevealStartEvent: {fileID: 11400000, guid: fed4de9949689654a8638ed9737f2c72, type: 2}
+  onLineRevealEndEvent: {fileID: 11400000, guid: 6e1733befe1278d4b975d27f4a516717, type: 2}
+  onChoiceTakenEvent: {fileID: 11400000, guid: 587317707969e9b47b84dbd8b418068f, type: 2}
 --- !u!4 &1742642393
 Transform:
   m_ObjectHideFlags: 0

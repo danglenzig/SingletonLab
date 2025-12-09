@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 473f91404c2d7e446b7fd4e34bdfb2c7, type: 3}
+  m_Name: 01A_POLITICS
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueChoiceSO
+  choiceName: 01A_POLITICS
+  targetLine: {fileID: 11400000, guid: 2bcbadeaeea858944a632aedd7f4bcf9, type: 2}
+  isQuit: 0
+  onChoiceTakenEventString: 
+  choiceButtonText: Polyticks
+  choiceButtonColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  choiceTextColor: {r: 1, g: 0.8431373, b: 0, a: 1}
+  choiceID: 37a8f56e-cbc0-4da3-ac90-595f496de4c7

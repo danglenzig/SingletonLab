@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f93e48fc7518854ba1903e5d684c06b, type: 3}
+  m_Name: 03_ECONOMY
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueLineSO
+  lineName: 03_ECONOMY
+  speakerName: Namey Nameson
+  choices:
+  - {fileID: 11400000, guid: 8ac1b392a91020f4cbe86ee25ada1f3a, type: 2}
+  - {fileID: 11400000, guid: c57faa5bdfb9b1d47b77d14b20c8cf34, type: 2}
+  isQuit: 0
+  onLineStartedEventString: 
+  onLineEndedEventString: 
+  lineText: You mean like stonks and stuff?
+  characterRevealInterval: 0.002
+  portraitTextureResourcePath: Resources/...
+  portraitOnRight: 0
+  nextLine: {fileID: 0}
+  speakerNameColor: {r: 1, g: 0.8431373, b: 0, a: 1}
+  lineTextColor: {r: 1, g: 0.8431373, b: 0, a: 1}
+  lineID: 1055d5e9-d424-45bf-90c2-770658179b30

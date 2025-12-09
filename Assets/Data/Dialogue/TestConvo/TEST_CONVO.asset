@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b45e7adc4b7853409a9faae03452097, type: 3}
+  m_Name: TEST_CONVO
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationSO
+  conversationName: TEST_CONVO
+  lines:
+  - {fileID: 11400000, guid: 0dcda981868844c4f8464fc6d1fffda4, type: 2}
+  - {fileID: 11400000, guid: 087581e61a18d944d8a8f201df852cb2, type: 2}
+  - {fileID: 11400000, guid: 2bcbadeaeea858944a632aedd7f4bcf9, type: 2}
+  - {fileID: 11400000, guid: 4c0fa6bb83b2c3e46919d8b9edb87e43, type: 2}
+  - {fileID: 11400000, guid: aabcf9e93ee8b3f4284d309ff04735ce, type: 2}
+  onConversationStartedEventString: TEST_CONVO_STARTED
+  onConversationEndedEventString: TEST_CONVO_ENDED
+  conversationID: 
