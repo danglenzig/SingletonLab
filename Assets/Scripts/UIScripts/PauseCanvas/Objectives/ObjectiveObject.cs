@@ -10,5 +10,16 @@ public class ObjectiveObject : MonoBehaviour
         
     }
 
+    public void SetObjectiveText(string txt, bool subdued = false)
+    {
+        objectiveText.color = Color.gold;
+        objectiveText.text = txt;
+        if (subdued)
+        {
+            objectiveText.fontStyle = FontStyles.Strikethrough;
+            objectiveText.color = Color.gray;
+        }
+    }
+
 
 }

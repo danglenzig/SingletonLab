@@ -2692,6 +2692,7 @@ MonoBehaviour:
   objectiveObjectPrefab: {fileID: 8658125529801189832, guid: 28569f3f885015245a90a0aac677b16d, type: 3}
   contentParent: {fileID: 204686317}
   verticalScrollbar: {fileID: 1847855653}
+  displayQuestStatus: 2
 --- !u!1 &924084083
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,6 +3703,7 @@ MonoBehaviour:
   objectiveObjectPrefab: {fileID: 8658125529801189832, guid: 28569f3f885015245a90a0aac677b16d, type: 3}
   contentParent: {fileID: 1873711070}
   verticalScrollbar: {fileID: 1863478546}
+  displayQuestStatus: 1
 --- !u!1 &1371650731
 GameObject:
   m_ObjectHideFlags: 0
