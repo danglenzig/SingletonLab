@@ -8,33 +8,34 @@ public class DialogueManager : MonoBehaviour
     // Servialize this into whatever game object is initiating a dialogue
 
     [SerializeField] private ConversationSOPayloadEvent dialogueFinishedEvent; // Trigger this to indicate the dialogue is finished
-    [SerializeField] private StringPayloadEvent onConversationStartedEvent;
-    [SerializeField] private StringPayloadEvent onConversationEndedEvent;
-    [SerializeField] private StringPayloadEvent onLineRevealStartEvent;
-    [SerializeField] private StringPayloadEvent onLineRevealEndEvent;
-    [SerializeField] private StringPayloadEvent onChoiceTakenEvent;
+    [SerializeField] private StringPayloadEvent         onConversationStartedEvent;
+    [SerializeField] private StringPayloadEvent         onConversationEndedEvent;
+    [SerializeField] private StringPayloadEvent         onLineRevealStartEvent;
+    [SerializeField] private StringPayloadEvent         onLineRevealEndEvent;
+    [SerializeField] private StringPayloadEvent         onChoiceTakenEvent;
 
     private ConversationSO currentConvo = null;
 
 
     private void OnEnable()
     {
-        dialogueTriggeredEvent.OnEventTriggered += HandleDialogueTriggered;
-        onConversationStartedEvent.OnEventTriggered += HandleOnConversationStartedEvent;
-        onConversationEndedEvent.OnEventTriggered += HandleOnConversationEndedEvent;
-        onLineRevealStartEvent.OnEventTriggered += HandleOnLineRevealStartEvent;
-        onLineRevealEndEvent.OnEventTriggered += HandleOnLineRevealEndEvent;
-        onChoiceTakenEvent.OnEventTriggered += HandleOnChoiceTakenEvent;
+        dialogueTriggeredEvent.OnEventTriggered +=      HandleDialogueTriggered;
+        onConversationStartedEvent.OnEventTriggered +=  HandleOnConversationStartedEvent;
+        onConversationEndedEvent.OnEventTriggered +=    HandleOnConversationEndedEvent;
+        onLineRevealStartEvent.OnEventTriggered +=      HandleOnLineRevealStartEvent;
+        onLineRevealEndEvent.OnEventTriggered +=        HandleOnLineRevealEndEvent;
+        onChoiceTakenEvent.OnEventTriggered +=          HandleOnChoiceTakenEvent;
+
     }
 
     private void OnDisable()
     {
-        dialogueTriggeredEvent.OnEventTriggered -= HandleDialogueTriggered;
-        onConversationStartedEvent.OnEventTriggered -= HandleOnConversationStartedEvent;
-        onConversationEndedEvent.OnEventTriggered -= HandleOnConversationEndedEvent;
-        onLineRevealStartEvent.OnEventTriggered -= HandleOnLineRevealStartEvent;
-        onLineRevealEndEvent.OnEventTriggered -= HandleOnLineRevealEndEvent;
-        onChoiceTakenEvent.OnEventTriggered -= HandleOnChoiceTakenEvent;
+        dialogueTriggeredEvent.OnEventTriggered -=      HandleDialogueTriggered;
+        onConversationStartedEvent.OnEventTriggered -=  HandleOnConversationStartedEvent;
+        onConversationEndedEvent.OnEventTriggered -=    HandleOnConversationEndedEvent;
+        onLineRevealStartEvent.OnEventTriggered -=      HandleOnLineRevealStartEvent;
+        onLineRevealEndEvent.OnEventTriggered -=        HandleOnLineRevealEndEvent;
+        onChoiceTakenEvent.OnEventTriggered -=          HandleOnChoiceTakenEvent;
     }
 
 
